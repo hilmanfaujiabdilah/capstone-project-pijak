@@ -120,9 +120,8 @@ def inject_css() -> None:
             border: 1px solid rgba(148, 163, 184, 0.16);
             border-radius: 8px;
         }
-        [data-testid="stSidevarNav"]{
-            display: none;
-        }
+        [data-testid="stSidebarNav"] {
+             display: none !important;
         </style>
         """,
         unsafe_allow_html=True,
