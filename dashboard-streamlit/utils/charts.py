@@ -10,8 +10,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 # pyrefly: ignore [missing-import]
 import streamlit as st
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.model_selection import train_test_split
 
 try:
     # pyrefly: ignore [missing-import]
@@ -19,7 +17,6 @@ try:
 except ImportError:
     WordCloud = None
 
-from utils.modeling import load_model_assets
 from utils.ui import LABEL_COLORS
 
 # Path ke pre-computed metrics JSON (di dalam folder dashboard-streamlit/model/)
