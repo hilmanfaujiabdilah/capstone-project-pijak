@@ -3,6 +3,8 @@ import os
 import hashlib
 from datetime import datetime, timedelta
 
+from click import style
+
 import streamlit as st
 
 
@@ -102,6 +104,17 @@ def require_login() -> None:
     
     if is_authenticated():
         return
+    
+    # hide sidebar
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            display: none;
+         }
+         [data-testid="stSidebarCollapsedControl"] {
+            display: none !important;
+         }
+    """, unsafe_allow_html=True)
 
     expected_username, expected_password = auth_credentials()
 
