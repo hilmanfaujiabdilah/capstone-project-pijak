@@ -35,10 +35,14 @@ def setup_page(title: str, icon: str = "chart", require_auth: bool = True) -> No
         st.markdown("### Dashboard Sentimen")
         st.caption("Zenlytics Sentiment")
         st.divider()
-        st.caption("Navigasi")
+        st.page_link("app.py", label="Home")
+        st.page_link("pages/1_Predict_Sentiment.py", label="Predict Sentiment")
+        st.page_link("pages/2_Analytics.py", label="Analytics")
+        st.page_link("pages/3_Model_Performance.py", label="Model Performance")
+        st.page_link("pages/4_Batch_Prediction.py", label="Batch Prediction")
+        st.page_link("pages/5_About_Project.py", label="About Project")
         st.divider()
         logout_button()
-
 
 def inject_css() -> None:
     st.markdown(
@@ -115,6 +119,9 @@ def inject_css() -> None:
         div[data-testid="stDataFrame"] {
             border: 1px solid rgba(148, 163, 184, 0.16);
             border-radius: 8px;
+        }
+        [data-testid="stSidevarNav"]{
+            display: none;
         }
         </style>
         """,

@@ -1,9 +1,10 @@
 # pyrefly: ignore [missing-import]
 import streamlit as st
 import pandas as pd
+import json
+from pathlib import Path
 
-from utils.charts import confusion_matrix_chart, model_performance
-from utils.data import load_modeling_dataset
+from utils.charts import confusion_matrix_chart
 from utils.ui import page_hero, setup_page
 
 
@@ -14,12 +15,22 @@ page_hero(
 )
 
 try:
-    df_clean = load_modeling_dataset()
+    # Load metrics dari JSON
+    metrics_path = Path(__file__).parent.parent / "model" / "model_metrics.json"
+    with open(metrics_path) as f:
+        metrics_data = json.load(f)
     
-    with st.spinner("Menghitung metrik evaluasi model..."):
-        report_df, matrix_df, meta = model_performance(df_clean)
-    # accuracy diambil dari meta (bukan report_df) karena classification_report
-    # mengembalikan "accuracy" sebagai scalar, bukan dict, sehingga tidak ada di report_df
+    meta = metrics_data["meta"]
+    report_df = pd.DataFrame(metrics_data["classification_report"])
+    
+    # Build confusion matrix dataframe
+    matrix_data = metrics_data["confusion_matrix"]
+    matrix_df = pd.DataFrame(
+        matrix_data["matrix"],
+        index=matrix_data["labels"],
+        columns=matrix_data["labels"]
+    )
+    
     accuracy = meta["test_accuracy"]
     macro = report_df.loc[report_df["metric"] == "macro avg"].iloc[0]
     weighted = report_df.loc[report_df["metric"] == "weighted avg"].iloc[0]
@@ -59,4 +70,4 @@ try:
 
 except Exception as e:
     st.error(f"Terjadi kesalahan saat memproses evaluasi model: {str(e)}")
-    st.info("Pastikan model dan vectorizer tersedia di path yang benar.")
+    st.info("Pastikan model_metrics.json tersedia di folder model.")
