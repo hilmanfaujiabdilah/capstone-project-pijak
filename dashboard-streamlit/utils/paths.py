@@ -4,10 +4,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = BASE_DIR.parent
 
-# Model & Vectorizer paths - menggunakan local copies dalam dashboard-streamlit folder
-# Ini memastikan path bekerja di Streamlit Cloud
-MODEL_PATH = BASE_DIR / "model" / "model_svm_best.pkl"
-VECTORIZER_PATH = BASE_DIR / "model" / "tfidf_vectorizer.pkl"
+# Model & Vectorizer paths - dari model-result folder
+MODEL_PATH = PROJECT_ROOT / "model-result" / "model" / "model_svm_best.pkl"
+VECTORIZER_PATH = PROJECT_ROOT / "model-result" / "model" / "tfidf_vectorizer.pkl"
 
 # Dataset paths
 DATA_PATH = PROJECT_ROOT / "dataset" / "tokopedia_reviews.csv"
