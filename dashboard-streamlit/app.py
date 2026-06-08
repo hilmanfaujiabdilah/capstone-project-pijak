@@ -7,7 +7,7 @@ from utils.ui import page_hero, setup_page
 
 setup_page("Dashboard")
 
-df = load_dataset()
+df = load_dataset(("sentiment_label", "product_category"))
 metadata = load_metadata()
 summary = sentiment_summary(df)
 
@@ -48,8 +48,8 @@ with col_a:
         """
         Dashboard membantu membaca pola sentimen dari ribuan review produk dengan tampilan
         yang lebih mudah dipahami untuk presentasi capstone. Model utama memakai teks yang
-        sudah diproses sebagai `text_akhir`, label lexicon `polarity`, lalu TF-IDF dan
-        SVM linear dari notebook 02 bagian Data Murni.
+        tersimpan di Supabase dataset `zenlytics_reviews`, lalu TF-IDF dan SVM linear dari
+        notebook 02 bagian Data Murni.
         """
     )
 with col_b:
@@ -67,9 +67,9 @@ with st.expander("Detail dataset dan pipeline"):
             "train_size": metadata.get("train_size"),
             "test_size": metadata.get("test_size"),
             "stemmer": metadata.get("stemmer", "PySastrawi"),
-            "dataset": "data/fix_tokopedia_reviews.csv",
-            "feature_column": "text_akhir",
-            "target_column": "polarity",
+            "dataset": "Supabase: zenlytics_reviews",
+            "feature_column": "review_text_stemmed",
+            "target_column": "sentiment_label",
             "model_artifact": "modeling/model_save/model_svm.pkl",
             "vectorizer_artifact": "modeling/tfidf_vectorizer.pkl",
         }

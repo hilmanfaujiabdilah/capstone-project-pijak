@@ -15,10 +15,10 @@ from utils.ui import page_hero, setup_page
 setup_page("Analytics")
 page_hero(
     "Analytics Review",
-    "Eksplorasi kata, panjang review, dan distribusi `polarity` dari dataset.",
+    "Eksplorasi kata, panjang review, dan distribusi sentimen dari Supabase `zenlytics_reviews`.",
 )
 
-df = load_dataset()
+df = load_dataset(("sentiment_label", "review_text_stemmed", "review_word_count"))
 
 tab_overview, tab_words, tab_wordcloud = st.tabs(["Overview", "Frekuensi Kata", "Wordcloud"])
 
