@@ -6,9 +6,8 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 
 from utils.charts import confusion_matrix_chart
 from utils.ui import page_hero, setup_page
-from utils.data import load_train_test, LABEL_TO_ID
+from utils.data import load_train_test, load_preprocessed_train_test, LABEL_TO_ID
 from utils.modeling import load_model_assets
-from utils.preprocessing import preprocess_text
 
 
 setup_page("Model Performance", "M")
@@ -20,26 +19,21 @@ page_hero(
 try:
     # Load model & vectorizer
     model, vectorizer = load_model_assets()
-    
-    # Load train & test data
-    train_df, test_df = load_train_test()
-    
-    # Preprocess test texts
-    test_texts = test_df["review_text_stemmed"].apply(preprocess_text).tolist()
-    
-    # Vectorize test texts
+
+    # Load preprocessed texts & labels (cached — stemming hanya 1x per sesi)
+    train_texts, train_labels, test_texts, test_labels = load_preprocessed_train_test()
+
+    # Vectorize
     test_vectors = vectorizer.transform(test_texts)
-    
+    train_vectors = vectorizer.transform(train_texts)
+
     # Get predictions
     y_pred = model.predict(test_vectors)
-    y_true = test_df["sentiment_label"].values
-    
+    y_true = test_labels
+
     # Calculate metrics
     test_accuracy = accuracy_score(y_true, y_pred)
-    train_accuracy = model.score(
-        vectorizer.transform(train_df["review_text_stemmed"].apply(preprocess_text).tolist()),
-        train_df["sentiment_label"].values
-    )
+    train_accuracy = model.score(train_vectors, train_labels)
     
     # Classification report
     report = classification_report(y_true, y_pred, output_dict=True, zero_division=0)
@@ -64,7 +58,7 @@ try:
     col4.metric("F1 Macro", f"{macro_row['f1-score']:.2%}")
 
     st.caption(
-        f"Split modeling: {len(train_df):,} data training dan {len(test_df):,} data testing."
+        f"Split modeling: {len(train_texts):,} data training dan {len(test_texts):,} data testing."
     )
 
     left, right = st.columns([1.05, 0.95])

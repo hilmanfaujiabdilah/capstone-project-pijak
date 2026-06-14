@@ -1,11 +1,13 @@
 import json
 
 import pandas as pd
+# pyrefly: ignore [missing-import]
 import streamlit as st
 from sklearn.model_selection import train_test_split
 
 from utils.paths import DATA_PATH, METADATA_PATH
 from utils.supabase_config import get_supabase_connection
+from utils.preprocessing import preprocess_text
 
 
 LABEL_TO_ID = {"negative": 0, "neutral": 1, "positive": 2}
@@ -121,6 +123,21 @@ def load_train_test() -> tuple[pd.DataFrame, pd.DataFrame]:
         stratify=df["sentiment_label"],
     )
     return train.reset_index(drop=True), test.reset_index(drop=True)
+
+
+@st.cache_data(show_spinner=False)
+def load_preprocessed_train_test() -> tuple[list[str], list, list[str], list]:
+    """Return (train_texts, train_labels, test_texts, test_labels) setelah preprocessing.
+
+    Hasil di-cache sehingga preprocess_text (termasuk stemming Sastrawi) hanya
+    dijalankan sekali selama sesi Streamlit — bukan setiap kali halaman dibuka.
+    """
+    train_df, test_df = load_train_test()
+    train_texts = train_df["review_text_stemmed"].apply(preprocess_text).tolist()
+    train_labels = train_df["sentiment_label"].tolist()
+    test_texts = test_df["review_text_stemmed"].apply(preprocess_text).tolist()
+    test_labels = test_df["sentiment_label"].tolist()
+    return train_texts, train_labels, test_texts, test_labels
 
 
 @st.cache_data(show_spinner=False)
