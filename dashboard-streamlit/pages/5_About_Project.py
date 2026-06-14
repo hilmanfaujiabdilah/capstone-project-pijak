@@ -34,7 +34,7 @@ st.json(
     {
         "project": metadata.get("project", "Zenlytics"),
         "version": metadata.get("versi", "v1.0"),
-        "created_by": metadata.get("dibuat_oleh", "Nurhayati Kusumaning Ayu"),
+        "created_by": metadata.get("dibuat_oleh", "PJK - GM028"),
         "rows_clean": metadata.get("total_rows_clean"),
         "train_size": metadata.get("train_size"),
         "test_size": metadata.get("test_size"),
