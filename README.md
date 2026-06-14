@@ -11,7 +11,7 @@ Tema: AI for Business Intelligence and Market Insights
 
 ZenLytics adalah aplikasi analisis sentimen ulasan produk Tokopedia berbasis Artificial Intelligence dan Machine Learning yang dibangun menggunakan Streamlit.
 
-Aplikasi ini membantu pengguna memahami persepsi pelanggan terhadap suatu produk melalui analisis sentimen otomatis, visualisasi data, evaluasi model, dan prediksi sentimen secara realtime maupun batch.
+Aplikasi ini membantu pengguna memahami persepsi pelanggan terhadap suatu produk melalui analisis sentimen otomatis, visualisasi data, evaluasi model, dan prediksi sentimen secara real-time maupun batch.
 
 ZenLytics mengimplementasikan pipeline Natural Language Processing (NLP) Bahasa Indonesia mulai dari preprocessing teks hingga klasifikasi sentimen menggunakan algoritma Support Vector Machine (SVM).
 
@@ -37,7 +37,7 @@ Project ini bertujuan untuk:
 - Membantu pelaku bisnis memahami opini pelanggan.
 - Menyediakan dashboard analitik yang mudah digunakan.
 - Menampilkan insight sentimen secara visual.
-- Menyediakan sistem prediksi sentimen realtime berbasis AI.
+- Menyediakan sistem prediksi sentimen real-time berbasis AI.
 
 ---
 
@@ -52,7 +52,7 @@ Text Cleaning
       ↓
 Case Folding
       ↓
-Slang Word Normalization
+Slang Word Normalisation
       ↓
 Tokenization
       ↓
@@ -169,7 +169,7 @@ capstone-project-pijak-main/
 │   └── seluruh file visualisasi EDA
 │
 └── database-connection/
-    └── Databse Credential Zenlytics.txt
+    └── Database Credential Zenlytics.txt
 ```
 
 ---

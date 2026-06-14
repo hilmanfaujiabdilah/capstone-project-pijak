@@ -62,7 +62,7 @@ with col_b:
 with st.expander("Detail dataset dan pipeline"):
     st.write(
         {
-            "project": metadata.get("project", "VibeSight"),
+            "project": metadata.get("project", "Zenlytics"),
             "version": metadata.get("versi", "v1.0"),
             "train_size": metadata.get("train_size"),
             "test_size": metadata.get("test_size"),
