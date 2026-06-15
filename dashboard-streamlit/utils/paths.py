@@ -5,8 +5,8 @@ BASE_DIR = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = BASE_DIR.parent
 
 # Model & Vectorizer paths - dari model-result folder
-MODEL_PATH = PROJECT_ROOT / "model-result" / "model" / "model_svm_best.pkl"
-VECTORIZER_PATH = PROJECT_ROOT / "model-result" / "model" / "tfidf_vectorizer.pkl"
+MODEL_PATH = PROJECT_ROOT / "model-result" / "model_v2" / "svm_model_v2.pkl"
+VECTORIZER_PATH = PROJECT_ROOT / "model-result" / "model_v2" / "tfidf_vectorizer_v2.pkl"
 
 # Dataset paths
 DATA_PATH = PROJECT_ROOT / "dataset" / "tokopedia_reviews.csv"

@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "model_version": "v2",
+    "label_source": "sentiment_label (rating-based, lexicon-free)",
+    "feature_pipeline": "review_text -> dashboard preprocess_text (Sastrawi + negasi dipertahankan)",
+    "removed": [
+      "lexicon labeling (polarity)",
+      "text_akhir column",
+      "MPStemmer"
+    ],
+    "split": "GroupShuffleSplit by product_id, test_size=0.2, random_state=42",
+    "leakage_validation": {
+      "text_overlap": 0,
+      "product_overlap": 0
+    },
+    "train_size": 42292,
+    "test_size": 10970,
+    "train_accuracy": 0.9937,
+    "test_accuracy": 0.9617,
+    "macro_f1": 0.514,
+    "weighted_f1": 0.9631,
+    "svm_config": {
+      "model": "LinearSVC",
+      "C": 1.0,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "min_df": 5,
+      "max_df": 0.9,
+      "max_features": 10000,
+      "vocab_size": 10000
+    }
+  },
+  "classification_report": {
+    "negative": {
+      "precision": 0.3727810650887574,
+      "recall": 0.4064516129032258,
+      "f1-score": 0.3888888888888889,
+      "support": 155.0
+    },
+    "neutral": {
+      "precision": 0.15760869565217392,
+      "recall": 0.18471337579617833,
+      "f1-score": 0.17008797653958943,
+      "support": 157.0
+    },
+    "positive": {
+      "precision": 0.9850240180842046,
+      "recall": 0.981234753237005,
+      "f1-score": 0.9831257344300822,
+      "support": 10658.0
+    },
+    "accuracy": 0.9617137648131268,
+    "macro avg": {
+      "precision": 0.5051379262750454,
+      "recall": 0.5241332473121364,
+      "f1-score": 0.5140341999528535,
+      "support": 10970.0
+    },
+    "weighted avg": {
+      "precision": 0.9645315966315043,
+      "recall": 0.9617137648131268,
+      "f1-score": 0.9630934975068651,
+      "support": 10970.0
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "matrix": [
+      [
+        63,
+        30,
+        62
+      ],
+      [
+        31,
+        29,
+        97
+      ],
+      [
+        75,
+        125,
+        10458
+      ]
+    ]
+  }
+}
